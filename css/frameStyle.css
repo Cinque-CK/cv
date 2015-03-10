@@ -1,0 +1,452 @@
+.content {
+    background-color: #22242d;
+}
+.contentTop, .contentBottom {
+    height: 408px;
+}
+.contentCenter {
+    background-color: #3d3f4f;
+    height: 408px;
+}
+.content h1 {
+    margin: 0px auto;
+    padding: 40px 0;
+    text-align: center;
+    font-size: 48px;
+}
+.content h2 {
+    margin: 0 auto;
+    padding: 30px 0 0 0;
+    text-align: center;
+    font-size: 24px;
+}
+.content h3 {
+	margin-top: 50px;
+    padding: 0 0 0 50px;
+    font-size: 18px;
+    text-align: center;
+}
+.comment li {
+    display: block;
+    width: 200px;
+    margin: 0 auto;
+    position: relative;
+}
+.info_outer {
+    width: 450px;
+    margin: 30px auto;
+    top: -10px;
+    left: -20px;
+}
+.info_outer li {
+    display: block;
+    width: 225px;
+    height: 225px;
+    position: static;
+    float: left;
+}
+.info_inner {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    margin: 20px;
+}
+.info_inner li {
+    display: block;
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    position: relative;
+    font-size: 16px;
+}
+.info_inner span{
+	position: absolute;
+	width: 235px;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+}
+.comment li::before, .info_inner li::before {
+    content: "";
+    display: block;
+    width: 13px;
+    height: 15px;
+    position: absolute;
+    left: -20px;
+    top: 15px;
+    background: url("../image/listStyle.png") no-repeat;
+}
+.skills {
+    overflow: hidden;
+    padding: 80px 40px 100px 40px;
+}
+.skills .main-skills {
+    float: left;
+    width: 331px;
+    margin-right: 35px;
+}
+.skills .other-skills {
+    float: left;
+    width: 331px;
+    margin-left: 35px;
+}
+.block h2 {
+    padding: 30px 0;
+}
+.skills ul {
+    margin-top: 10px;
+}
+.skills li {
+    margin-bottom: 5px;
+    position: static;
+}
+.skills .progressbar {
+    padding-left: 0 !important;
+    display: block;
+    height: 35px;
+    width: 100%;
+}
+.main-skills .progressbar {
+    height: 50px;
+}
+.skills .progress {
+    display: block;
+    height: 100%;
+    position: relative;
+    text-align: left;
+    width: 150px;
+    border-radius: 3px 0px 0px 3px;
+    -webkit-transition: width .5s ease-in-out;
+    -moz-transition: width .5s ease-in-out;
+    -o-transition: width .5s ease-in-out;
+    transition: width .5s ease-in-out;
+}
+.skills .value {
+    display: none;
+    font-size: 17px;
+    color: #FFF;
+    padding-left: 13px;
+    line-height: 35px;
+    position: relative;
+}
+.main-skills .value {
+    line-height: 50px;
+}
+.skills .progress::before {
+    content: "";
+    display: block;
+    width: 0px;
+    height: 0px;
+    border-top: 17px solid transparent;
+    border-bottom: 17px solid transparent;
+    border-left: 10px solid #db5800;
+    position: absolute;
+    right: -10px;
+}
+.main-skills .progress::before {
+    border-top: 25px solid transparent;
+    border-bottom: 25px solid transparent;
+    border-left: 14px solid #db5800;
+    right: -14px;
+}
+.skills .dark-orange {
+    background: #db5800;
+}
+.skills .orange {
+    background: #ff9000;
+}
+.skills .orange::before, .main-skills .orange::before {
+    border-left-color: #ff9000;
+}
+.skills .yellow {
+    background: #f0c600;
+}
+.skills .yellow::before, .main-skills .yellow::before {
+    border-left-color: #f0c600;
+}
+.skills .green {
+    background: #8ea106;
+}
+.skills .green::before, .main-skills .green::before {
+    border-left-color: #8ea106;
+}
+.skills .turquoise {
+    background: #09bf7d;
+}
+.skills .turquoise::before, .main-skills .turquoise::before {
+    border-left-color: #09bf7d;
+}
+.skills .detail{
+	display: none;
+	width: 300px;
+	left: 20px;
+	top: 60px;
+	position: absolute;
+	background-color: #74747D;
+	color: #FFF;
+	font-size: 14px;
+	border-radius: 5px;
+	padding: 10px;
+	z-index: 1;
+}
+.other-skills .detail{
+	top: 20px;
+}
+.main-skills .detail::before{
+	content: "";
+	width: 0px;
+	height: 0px;
+	padding: 0px;
+	position: absolute;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-bottom: 10px solid #74747D;
+	left: 40px;
+	top: -10px;
+}
+.tools-outer {
+    width: 586px;
+    height: 220px;
+    margin: 20px auto;
+}
+.tools-outer li {
+    display: block;
+    width: 195px;
+    height: 100%;
+    float: left;
+    position: static;
+}
+.tools-inner {
+    width: 100%;
+    height: 100%;
+}
+.tools-inner li {
+    position: relative;
+    display: block;
+    height: 110px;
+}
+.tools-inner .tools-icon {
+    position: absolute;
+    width: 75px;
+    height: 43px;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: #C9CDDD;
+}
+.tools-inner .tools-icon::before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-left: 37px solid transparent;
+    border-right: 37px solid transparent;
+    border-bottom: 21px solid #C9CDDD;
+    top: -21px;
+    z-index: -1;
+}
+.tools-inner .tools-icon::after {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-left: 37px solid transparent;
+    border-right: 37px solid transparent;
+    border-top: 21px solid #C9CDDD;
+    bottom: -21px;
+    z-index: -1;
+}
+.tools-inner .img{
+	width: 50px;
+	height: 50px;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	background-image: url("../image/icon.png");
+	z-index: 1;
+}
+.tools-inner span{
+	width: 100px;
+	height: 20px;
+	position: absolute;
+	display: none;
+	left: -18px;
+	top: 50px;
+	background-color: #3D3F4F;
+	border-radius: 5px;
+	padding: 5px;
+	text-align: center;
+}
+.tools-inner .img-sublime{
+	background-position: -100px 0;
+}
+.tools-inner .img-idea{
+	background-position: -50px -50px;
+}
+.tools-inner .img-plsql{
+	background-position: -50px 0;
+}
+.tools-inner .img-ietester{
+	background-position: -100px -50px;
+}
+.tools-inner .img-arcgis{
+	background-position: 0px -50px;
+}
+#content-resume h3{
+	text-align: left;
+	font-size: 20px;
+	margin-bottom: 20px;
+}
+.employment, .education {
+    width: 500px;
+    background: url('../image/dot.gif') repeat-y;
+    margin: 120px 0 0 160px;
+}
+.education {
+    margin-top: 40px;
+    margin-bottom: 200px;
+}
+.textarea {
+    padding: 20px 50px;
+    position: relative;
+}
+.textarea .time {
+    width: 118px;
+    height: 54px;
+    background-color: #049bc7;
+    position: absolute;
+    left: -160px;
+    top: 0px;
+}
+.textarea .time::before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 0;
+    border-top: 27px solid transparent;
+    border-bottom: 27px solid transparent;
+    border-left: 19px solid #049bc7;
+    right: -19px;
+}
+.textarea .time::after {
+    content: "";
+    display: block;
+    width: 13px;
+    height: 15px;
+    position: absolute;
+    right: -51px;
+    top: 20px;
+    background: url("../image/listStyle.png") no-repeat;
+}
+.textarea span{
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	text-align: center;
+	line-height: 54px;
+	font-size: 20px;
+}
+.gallery{
+	height: 380px;
+	position: relative;
+}
+.gallery-frame{
+	position: absolute;
+	width: 480px;
+	height: 270px;
+	left: 0px;
+	right: 0px;
+	margin: 84px auto;
+	overflow: hidden;
+}
+.gallery .icon{
+	position: absolute;
+	color: #D9D9D9;
+	font-size: 64px;
+	top: 200px;
+	z-index: 3;
+	cursor: pointer;
+	-webkit-transform: scale(1);
+	-moz-transform: scale(1);
+	-o-transform: scale(1);
+	transform: scale(1);
+
+	-webkit-transition: all 0.2s ease;
+	-moz-transition: all 0.2s ease;
+	-o-transition: all 0.2s ease;
+	transition: all 0.2s ease;
+}
+.gallery .icon-left{
+	left: 72px;
+}
+.gallery .icon-right{
+	right: 72px;
+}
+.gallery .dot{
+	position: absolute;
+	width: 50px;
+	height: 10px;
+	left: 216px;
+	top: 250px;
+	z-index: 3;
+}
+.gallery .dot li{
+	float: left;
+	display: block;
+	width: 6px;
+	height: 6px;
+	position: static;
+	border-radius: 50%;
+	border: 2px solid #545A62;
+	background-color: transparent;
+	margin: 0 1px 0 0;
+}
+.pic{
+	width: 3000px;
+	height: 100%;
+	position: absolute;
+	left: 0px;
+	white-space: nowrap;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+.pic li{
+	width: 480px;
+	height: 270px;
+	position: static;
+	margin: 0 15px 0 0;
+	background-color: #fff;
+	float: left;
+}
+.pic img{
+	height: 100%;
+	width: 100%;
+}
+.remark{
+	width: 400px;
+	height: 300px;
+	margin: 0px auto;
+}
+.remark li{
+	position: absolute;
+	width: 400px;
+	height: 300px;
+	margin: 0px;
+}
+.remark span{
+	width: 100%;
+	height: 100%;
+}

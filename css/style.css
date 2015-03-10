@@ -1,0 +1,250 @@
+body {
+    background: url('../image/bg.jpg') 50% 50% fixed;
+    color: #c7c7c7;
+    font-family: 'Microsoft Yahei', sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    position: relative;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.frame {
+    width: 1280px;
+    margin: 0px auto;
+}
+.header {
+    position: relative;
+    width: 822px;
+    height: 404px;
+    margin: 50px auto 0;
+    z-index: 1;
+    -webkit-transition: height .5s ease-in-out;
+    -moz-transition: height .5s ease-in-out;
+    -ms-transition: height .5s ease-in-out;
+    -o-transition: height .5s ease-in-out;
+    transition: height .5s ease-in-out;
+}
+.middle{
+	width: 100%;
+	background-color: #22242d;
+	position: absolute;
+    left: 0px;
+    top: 184px;
+    bottom: -188px;
+    overflow: hidden;
+    z-index: 1;
+}
+.footer {
+    width: 822px;
+    height: 388px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+.lang{
+    width: 80px;
+    height: 40px;
+    position: absolute;
+    background-color: #fff;
+    right: 0px;
+    top: 0px;
+}
+.lang a{
+    display: block;
+    width: 50%;
+    height: 100%;
+    position: static;
+    float: left;
+}
+.lang .zhCN{
+    background-color: #345;
+}
+.lang .zhCN:before{
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    left: -12px;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-right: 12px solid #345;
+}
+.lang .enUS{
+    background-color: #678;
+}
+.lang .enUS:before{
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    right: -12px;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 12px solid #678;
+}
+.header ul{
+    position: relative;
+    z-index: 2;
+}
+.footer ul{
+    z-index: 2;
+}
+.hexagon {
+    width: 204px;
+    height: 236px;
+    overflow: hidden;
+    visibility: hidden;
+    float: left;
+    display: block;
+    z-index: 2;
+    -webkit-transform: rotate(30deg);
+    -moz-transform: rotate(30deg);
+    -ms-transform: rotate(30deg);
+    -o-transform: rotate(30deg);
+    transform: rotate(30deg);
+}
+.hexagon_inner1 {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    visibility: hidden;
+    -webkit-transform: rotate(-60deg);
+    -moz-transform: rotate(-60deg);
+    -ms-transform: rotate(-60deg);
+    -o-transform: rotate(-60deg);
+    transform: rotate(-60deg);
+}
+.hexagon_inner2 {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    visibility: visible;
+    -webkit-transform: rotate(-60deg);
+    -moz-transform: rotate(-60deg);
+    -ms-transform: rotate(-60deg);
+    -o-transform: rotate(-60deg);
+    transform: rotate(-60deg);
+}
+.hexagon_inner3 {
+    width: 235px;
+    height: 100%;
+    overflow: hidden;
+    visibility: visible;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+.work, .info {
+    margin: 168px 0 0 -43px;
+}
+.technique, .resume {
+    margin: 66px 0 0 -28px;
+}
+.headpic {
+    margin: -36px 0 0 -28px;
+}
+.work {
+    margin: 168px -43px 0 -28px;
+}
+.github, .weibo {
+    margin: -32px 0 0 -43px;
+}
+.stackoverflow, .twitter {
+    margin: 70px 0 0 -28px;
+}
+.copyright {
+    margin: 172px 0 0 -28px;
+}
+.weibo {
+    margin: -32px -43px 0 -28px;
+}
+.hexagon a {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: #fff;
+    visibility: visible;
+    display: block;
+    padding-top: 84px;
+    text-decoration: none;
+}
+.work a,.info a{
+	background-color: #545a62;
+}
+.technique a,.resume a{
+	background-color: #74747d;
+}
+.github a,.weibo a{
+	background-color: #505f74;
+}
+.stackoverflow a,.twitter a{
+	background-color: #7d7daa;
+}
+.copyright a{
+	cursor: default;
+}
+.copyright a::before{
+	content: "Copyright © 2015 Cinque. All rights reserved.";
+	display: block;
+	width: 100px;
+	height: 20px;
+	color: #FFF;
+}
+.hexagon .icon{
+    font-size: 64px;
+    color: #D9D9D9;
+}
+.hexagon .icon-top{
+    display: block;
+    position: relative;
+    top: 17px;
+    -webkit-transform-origin: 50% 50%;
+    -moz-transform-origin: 50% 50%;
+    -o-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+
+    -webkit-transform: scale(1) rotate(0deg);
+    -moz-transform: scale(1) rotate(0deg);
+    -o-transform: scale(1) rotate(0deg);
+    transform: scale(1) rotate(0deg);
+
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+.hexagon .icon-bottom{
+    position: relative;
+    top: 50px;
+    display: none;
+    font-size: 24px;
+    color: #D9D9D9;
+    -webkit-transition: top 0.2s ease;
+    -moz-transition: top 0.2s ease;
+    -o-transition: top 0.2s ease;
+    transition: top 0.2s ease;
+}
+.middle .cover{
+    width: 100%;
+    height: 100%;
+    background-color: #22242d;
+    opacity: 0;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 6;
+    display: none;
+}
+.middle li{
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0px;
+	top: 0px;
+}
+
