@@ -1,0 +1,38 @@
+{
+  "name": "cv",
+  "version": "1.0.0",
+  "description": "�����б��� 1.���˼��� 2.���� 3.���� 4.��Ʒ 5.github 6.stackoverflow 7.twitter 8.weibo 9.email",
+  "main": "index.js",
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "webpack": "^2.3.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-plugin-react-transform": "^2.0.2",
+    "babel-plugin-syntax-class-properties": "^6.13.0",
+    "babel-plugin-transform-class-properties": "^6.23.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-react": "^6.23.0",
+    "css-loader": "^0.27.3",
+    "html-webpack-plugin": "^2.28.0",
+    "react-transform-hmr": "^1.0.4",
+    "style-loader": "^0.16.1",
+    "webpack-dev-server": "^2.4.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cinque-CK/cv.git"
+  },
+  "author": "Cinque",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cinque-CK/cv/issues"
+  },
+  "homepage": "https://github.com/Cinque-CK/cv#readme"
+}
