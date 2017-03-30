@@ -1,0 +1,34 @@
+#wrapper{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #7d7daa;
+}
+.frame-cv{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    max-width: 1440px;
+}
+
+.frame-cv .switch{
+    position:absolute;
+}
+
+.frame-cv .container{
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.frame-cv .container-top,
+.frame-cv .container-bottom{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 493px;
+    min-width: 493px;
+}

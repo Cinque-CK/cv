@@ -2,6 +2,9 @@ import React, {Component, PropTypes} from 'react';
 import I18n from './i18n.js';
 import HexgonCOMP from './com/hexagon.jsx';
 
+import '../css/common.css';
+import '../css/cv.css';
+
 export default class Cv extends Component {
     constructor(props) {
         super(props);
@@ -10,7 +13,7 @@ export default class Cv extends Component {
         };
 
         this.handleClickAboutMe = this.handleClickAboutMe.bind(this);
-        this.handleClickAbility = this.handleClickAbility.bind(this);
+        this.handleClickSkills = this.handleClickSkills.bind(this);
         this.handleClickExperience = this.handleClickExperience.bind(this);
         this.handleClickWorks = this.handleClickWorks.bind(this);
         this.handleClickContactMe = this.handleClickContactMe.bind(this);
@@ -22,7 +25,7 @@ export default class Cv extends Component {
 
     }
 
-    handleClickAbility() {
+    handleClickSkills() {
 
     }
 
@@ -35,7 +38,7 @@ export default class Cv extends Component {
     }
 
     handleClickContactMe(){
-
+        console.log('contact me')
     }
 
     switchLang(){
@@ -58,13 +61,13 @@ export default class Cv extends Component {
                 handleClickFunc: this.handleClickAboutMe
             },
             hex_ability = {
-                classPrefix: 'ability',
-                iconName:'ability',
-                tipText:I18n[lang].ability,
-                handleClickFunc: this.handleClickAbility
+                classPrefix: 'skills',
+                iconName:'skills',
+                tipText:I18n[lang].skills,
+                handleClickFunc: this.handleClickSkills
             },
             hex_experience = {
-                classPrefix: 'experience,',
+                classPrefix: 'experience',
                 iconName:'experience',
                 tipText:I18n[lang].experience,
                 handleClickFunc: this.handleClickExperience
@@ -84,19 +87,18 @@ export default class Cv extends Component {
 
 
         return (
-            <div>
-                <div className="head">
-                    <div>
-                        <span onClick={this.switchLang}>中</span>
-                        <span onClick={this.switchLang}>En</span>
-                    </div>
+            <div className="frame-cv">
+                <div className="switch">
+                    <span onClick={this.switchLang}>中</span>
+                    <span onClick={this.switchLang}>En</span>
                 </div>
-                <div className="body">
+                <div className="container">
                     <div className="container-top">
                         <HexgonCOMP {...hex_aboutMe}/>
                         <HexgonCOMP {...hex_avatar}/>
                         <HexgonCOMP {...hex_ability}/>
                     </div>
+                    <div className="content"></div>
                     <div className="container-bottom">
                         <HexgonCOMP {...hex_experience}/>
                         <HexgonCOMP {...hex_contactMe}/>
