@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import ReactCssTransitionGroup from 'react-addons-css-transition-group';
 import I18n from './i18n.js';
 import HexgonCOMP from './com/hexagon.jsx';
 
@@ -9,7 +10,8 @@ export default class Cv extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            lang: 'zhCN'
+            lang: 'enUS',
+            activeContent:[]
         };
 
         this.handleClickAboutMe = this.handleClickAboutMe.bind(this);
@@ -22,6 +24,13 @@ export default class Cv extends Component {
     }
 
     handleClickAboutMe() {
+        debugger
+        let arr = this.state.activeContent;
+        if(arr.indexOf('aboutMe') > -1){
+            this.setState({activeContent:['aboutMe']});
+        } else {
+            this.setState({activeContent:[]});
+        }
 
     }
 
@@ -38,7 +47,8 @@ export default class Cv extends Component {
     }
 
     handleClickContactMe(){
-        console.log('contact me')
+        console.log('contact me');
+
     }
 
     switchLang(){
@@ -85,6 +95,9 @@ export default class Cv extends Component {
                 handleClickFunc: this.handleClickContactMe
             };
 
+        let content = this.state.activeContent.map((item,index)=>{
+            return <div key={item}></div>;
+        });
 
         return (
             <div className="frame-cv">
@@ -98,7 +111,10 @@ export default class Cv extends Component {
                         <HexgonCOMP {...hex_avatar}/>
                         <HexgonCOMP {...hex_ability}/>
                     </div>
-                    <div className="content"></div>
+                    <ReactCssTransitionGroup transitionName="content" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+                        {/*<div key="content-aboutMe" className={this.state.aboutMeContent ? "content-aboutMe" : "hide"}></div>*/}
+                        {content}
+                    </ReactCssTransitionGroup>
                     <div className="container-bottom">
                         <HexgonCOMP {...hex_experience}/>
                         <HexgonCOMP {...hex_contactMe}/>

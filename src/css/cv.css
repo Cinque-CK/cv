@@ -15,6 +15,8 @@
 
 .frame-cv .switch{
     position:absolute;
+    top: -60vm;
+    right: 0;
 }
 
 .frame-cv .container{
@@ -29,6 +31,48 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 493px;
-    min-width: 493px;
+}
+
+.frame-cv .content-enter{
+    height: 0;
+}
+
+.frame-cv .content-enter-active{
+    height: 50vm;
+    transition: height 500ms ease-in;
+}
+
+.hexagon_inner3,
+.hexagon_inner3 *{
+    cursor: pointer;
+}
+
+.hexagon.aboutMe,
+.hexagon.experience{
+    margin-right: 4.9vmin;
+    align-self: flex-start;
+}
+
+.hexagon.skills,
+.hexagon.works{
+    margin-left: 4.9vmin;
+    align-self: flex-end;
+}
+
+.hexagon.avatar,
+.hexagon.contactMe{
+    position: absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    margin: auto;
+}
+
+.hexagon.avatar{
+    margin-top: -8.6vmin;
+}
+
+.hexagon.contactMe{
+    margin-bottom: -8.6vmin;
 }

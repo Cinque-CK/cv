@@ -14,7 +14,7 @@ export default class I18n{
         aboutMe:'About Me',
         skills:'Skills',
         experience:'Experience',
-        contactMe:'Contant Me',
+        contactMe:'Contact Me',
         works:'Works'
     }
 
