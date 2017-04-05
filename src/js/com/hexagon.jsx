@@ -27,7 +27,9 @@ export default class HexagonCOMP extends Component{
                 <div className="hexagon_inner1">
                     <div className="hexagon_inner2">
                         <div className="hexagon_inner3" onClick={handleClickFunc}>
-                            <div className={`hexagon_icon ${iconName}`}></div>
+                            <div className={"hexagon_icon"}>
+                                <span className={`icon-${iconName}`}></span>
+                            </div>
                             <div className="hexagon_text">{tipText}</div>
                         </div>
                     </div>

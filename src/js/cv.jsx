@@ -11,7 +11,7 @@ export default class Cv extends Component {
         super(props);
         this.state = {
             lang: 'enUS',
-            activeContent:[]
+            activeContent: -1 //-1-close 0-aboutMe 1-skills 2-experience 3-works 4-contactMe
         };
 
         this.handleClickAboutMe = this.handleClickAboutMe.bind(this);
@@ -24,31 +24,43 @@ export default class Cv extends Component {
     }
 
     handleClickAboutMe() {
-        debugger
-        let arr = this.state.activeContent;
-        if(arr.indexOf('aboutMe') > -1){
-            this.setState({activeContent:['aboutMe']});
+        if(this.state.activeContent === 0){
+            this.setState({activeContent:-1});
         } else {
-            this.setState({activeContent:[]});
+            this.setState({activeContent:0});
         }
-
     }
 
     handleClickSkills() {
-
+        if(this.state.activeContent === 1){
+            this.setState({activeContent:-1});
+        } else {
+            this.setState({activeContent:1});
+        }
     }
 
     handleClickExperience() {
-
+        if(this.state.activeContent === 2){
+            this.setState({activeContent:-1});
+        } else {
+            this.setState({activeContent:2});
+        }
     }
 
     handleClickWorks(){
-
+        if(this.state.activeContent === 3){
+            this.setState({activeContent:-1});
+        } else {
+            this.setState({activeContent:3});
+        }
     }
 
     handleClickContactMe(){
-        console.log('contact me');
-
+        if(this.state.activeContent === 4){
+            this.setState({activeContent:-1});
+        } else {
+            this.setState({activeContent:4});
+        }
     }
 
     switchLang(){
@@ -95,10 +107,6 @@ export default class Cv extends Component {
                 handleClickFunc: this.handleClickContactMe
             };
 
-        let content = this.state.activeContent.map((item,index)=>{
-            return <div key={item}></div>;
-        });
-
         return (
             <div className="frame-cv">
                 <div className="switch">
@@ -111,10 +119,7 @@ export default class Cv extends Component {
                         <HexgonCOMP {...hex_avatar}/>
                         <HexgonCOMP {...hex_ability}/>
                     </div>
-                    <ReactCssTransitionGroup transitionName="content" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
-                        {/*<div key="content-aboutMe" className={this.state.aboutMeContent ? "content-aboutMe" : "hide"}></div>*/}
-                        {content}
-                    </ReactCssTransitionGroup>
+                    <div className="content" className={this.state.activeContent === -1?"content":"content active"}></div>
                     <div className="container-bottom">
                         <HexgonCOMP {...hex_experience}/>
                         <HexgonCOMP {...hex_contactMe}/>

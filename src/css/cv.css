@@ -33,13 +33,46 @@
     align-items: center;
 }
 
-.frame-cv .content-enter{
+.frame-cv .content{
+    opacity: 0;
+    width: 0;
     height: 0;
+    animation: trans-content-close 2.5s;
 }
 
-.frame-cv .content-enter-active{
-    height: 50vm;
-    transition: height 500ms ease-in;
+.frame-cv .content.active{
+    opacity: 1;
+    width: 60vw;
+    height: 35vh;
+    animation: trans-content-open 2.5s;
+}
+
+@keyframes trans-content-open {
+    0% {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    100%{
+        opacity: 1;
+        width: 60vw;
+        height: 35vh;
+    }
+}
+
+@keyframes trans-content-close {
+    0%{
+        opacity: 1;
+        width: 60vw;
+        height: 35vh;
+    }
+
+    100% {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
 }
 
 .hexagon_inner3,
