@@ -3,11 +3,12 @@
 /******/ 		delete installedChunks[chunkId];
 /******/ 	}
 /******/ 	var parentHotUpdateCallback = this["webpackHotUpdate"];
-/******/ 	this["webpackHotUpdate"] = function webpackHotUpdateCallback(chunkId, moreModules) { // eslint-disable-line no-unused-vars
+/******/ 	this["webpackHotUpdate"] = 
+/******/ 	function webpackHotUpdateCallback(chunkId, moreModules) { // eslint-disable-line no-unused-vars
 /******/ 		hotAddUpdateChunk(chunkId, moreModules);
 /******/ 		if(parentHotUpdateCallback) parentHotUpdateCallback(chunkId, moreModules);
 /******/ 	} ;
-/******/
+/******/ 	
 /******/ 	function hotDownloadUpdateChunk(chunkId) { // eslint-disable-line no-unused-vars
 /******/ 		var head = document.getElementsByTagName("head")[0];
 /******/ 		var script = document.createElement("script");
@@ -16,7 +17,7 @@
 /******/ 		script.src = __webpack_require__.p + "" + chunkId + "." + hotCurrentHash + ".hot-update.js";
 /******/ 		head.appendChild(script);
 /******/ 	}
-/******/
+/******/ 	
 /******/ 	function hotDownloadManifest() { // eslint-disable-line no-unused-vars
 /******/ 		return new Promise(function(resolve, reject) {
 /******/ 			if(typeof XMLHttpRequest === "undefined")
@@ -55,14 +56,15 @@
 /******/ 		});
 /******/ 	}
 /******/
-/******/
+/******/ 	
+/******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "f836669b743883df5dce"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "443bc88eb46bfc569bbe"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParentsTemp = []; // eslint-disable-line no-unused-vars
-/******/
+/******/ 	
 /******/ 	function hotCreateRequire(moduleId) { // eslint-disable-line no-unused-vars
 /******/ 		var me = installedModules[moduleId];
 /******/ 		if(!me) return __webpack_require__;
@@ -108,7 +110,7 @@
 /******/ 					finishChunkLoading();
 /******/ 					throw err;
 /******/ 				});
-/******/
+/******/ 	
 /******/ 				function finishChunkLoading() {
 /******/ 					hotChunksLoading--;
 /******/ 					if(hotStatus === "prepare") {
@@ -124,7 +126,7 @@
 /******/ 		});
 /******/ 		return fn;
 /******/ 	}
-/******/
+/******/ 	
 /******/ 	function hotCreateModule(moduleId) { // eslint-disable-line no-unused-vars
 /******/ 		var hot = {
 /******/ 			// private stuff
@@ -134,7 +136,7 @@
 /******/ 			_selfDeclined: false,
 /******/ 			_disposeHandlers: [],
 /******/ 			_main: hotMainModule,
-/******/
+/******/ 	
 /******/ 			// Module API
 /******/ 			active: true,
 /******/ 			accept: function(dep, callback) {
@@ -167,7 +169,7 @@
 /******/ 				var idx = hot._disposeHandlers.indexOf(callback);
 /******/ 				if(idx >= 0) hot._disposeHandlers.splice(idx, 1);
 /******/ 			},
-/******/
+/******/ 	
 /******/ 			// Management API
 /******/ 			check: hotCheck,
 /******/ 			apply: hotApply,
@@ -182,23 +184,23 @@
 /******/ 				var idx = hotStatusHandlers.indexOf(l);
 /******/ 				if(idx >= 0) hotStatusHandlers.splice(idx, 1);
 /******/ 			},
-/******/
+/******/ 	
 /******/ 			//inherit from previous dispose call
 /******/ 			data: hotCurrentModuleData[moduleId]
 /******/ 		};
 /******/ 		hotMainModule = true;
 /******/ 		return hot;
 /******/ 	}
-/******/
+/******/ 	
 /******/ 	var hotStatusHandlers = [];
 /******/ 	var hotStatus = "idle";
-/******/
+/******/ 	
 /******/ 	function hotSetStatus(newStatus) {
 /******/ 		hotStatus = newStatus;
 /******/ 		for(var i = 0; i < hotStatusHandlers.length; i++)
 /******/ 			hotStatusHandlers[i].call(null, newStatus);
 /******/ 	}
-/******/
+/******/ 	
 /******/ 	// while downloading
 /******/ 	var hotWaitingFiles = 0;
 /******/ 	var hotChunksLoading = 0;
@@ -206,15 +208,15 @@
 /******/ 	var hotRequestedFilesMap = {};
 /******/ 	var hotAvailableFilesMap = {};
 /******/ 	var hotDeferred;
-/******/
+/******/ 	
 /******/ 	// The update info
 /******/ 	var hotUpdate, hotUpdateNewHash;
-/******/
+/******/ 	
 /******/ 	function toModuleId(id) {
 /******/ 		var isNumber = (+id) + "" === id;
 /******/ 		return isNumber ? +id : id;
 /******/ 	}
-/******/
+/******/ 	
 /******/ 	function hotCheck(apply) {
 /******/ 		if(hotStatus !== "idle") throw new Error("check() is only allowed in idle status");
 /******/ 		hotApplyOnUpdate = apply;
@@ -224,12 +226,12 @@
 /******/ 				hotSetStatus("idle");
 /******/ 				return null;
 /******/ 			}
-/******/
+/******/ 	
 /******/ 			hotRequestedFilesMap = {};
 /******/ 			hotWaitingFilesMap = {};
 /******/ 			hotAvailableFilesMap = update.c;
 /******/ 			hotUpdateNewHash = update.h;
-/******/
+/******/ 	
 /******/ 			hotSetStatus("prepare");
 /******/ 			var promise = new Promise(function(resolve, reject) {
 /******/ 				hotDeferred = {
@@ -249,7 +251,7 @@
 /******/ 			return promise;
 /******/ 		});
 /******/ 	}
-/******/
+/******/ 	
 /******/ 	function hotAddUpdateChunk(chunkId, moreModules) { // eslint-disable-line no-unused-vars
 /******/ 		if(!hotAvailableFilesMap[chunkId] || !hotRequestedFilesMap[chunkId])
 /******/ 			return;
@@ -263,7 +265,7 @@
 /******/ 			hotUpdateDownloaded();
 /******/ 		}
 /******/ 	}
-/******/
+/******/ 	
 /******/ 	function hotEnsureUpdateChunk(chunkId) {
 /******/ 		if(!hotAvailableFilesMap[chunkId]) {
 /******/ 			hotWaitingFilesMap[chunkId] = true;
@@ -273,7 +275,7 @@
 /******/ 			hotDownloadUpdateChunk(chunkId);
 /******/ 		}
 /******/ 	}
-/******/
+/******/ 	
 /******/ 	function hotUpdateDownloaded() {
 /******/ 		hotSetStatus("ready");
 /******/ 		var deferred = hotDeferred;
@@ -295,21 +297,21 @@
 /******/ 			deferred.resolve(outdatedModules);
 /******/ 		}
 /******/ 	}
-/******/
+/******/ 	
 /******/ 	function hotApply(options) {
 /******/ 		if(hotStatus !== "ready") throw new Error("apply() is only allowed in ready status");
 /******/ 		options = options || {};
-/******/
+/******/ 	
 /******/ 		var cb;
 /******/ 		var i;
 /******/ 		var j;
 /******/ 		var module;
 /******/ 		var moduleId;
-/******/
+/******/ 	
 /******/ 		function getAffectedStuff(updateModuleId) {
 /******/ 			var outdatedModules = [updateModuleId];
 /******/ 			var outdatedDependencies = {};
-/******/
+/******/ 	
 /******/ 			var queue = outdatedModules.slice().map(function(id) {
 /******/ 				return {
 /******/ 					chain: [id],
@@ -364,7 +366,7 @@
 /******/ 					});
 /******/ 				}
 /******/ 			}
-/******/
+/******/ 	
 /******/ 			return {
 /******/ 				type: "accepted",
 /******/ 				moduleId: updateModuleId,
@@ -372,7 +374,7 @@
 /******/ 				outdatedDependencies: outdatedDependencies
 /******/ 			};
 /******/ 		}
-/******/
+/******/ 	
 /******/ 		function addAllToSet(a, b) {
 /******/ 			for(var i = 0; i < b.length; i++) {
 /******/ 				var item = b[i];
@@ -380,17 +382,17 @@
 /******/ 					a.push(item);
 /******/ 			}
 /******/ 		}
-/******/
+/******/ 	
 /******/ 		// at begin all updates modules are outdated
 /******/ 		// the "outdated" status can propagate to parents if they don't accept the children
 /******/ 		var outdatedDependencies = {};
 /******/ 		var outdatedModules = [];
 /******/ 		var appliedUpdate = {};
-/******/
+/******/ 	
 /******/ 		var warnUnexpectedRequire = function warnUnexpectedRequire() {
 /******/ 			console.warn("[HMR] unexpected require(" + result.moduleId + ") to disposed module");
 /******/ 		};
-/******/
+/******/ 	
 /******/ 		for(var id in hotUpdate) {
 /******/ 			if(Object.prototype.hasOwnProperty.call(hotUpdate, id)) {
 /******/ 				moduleId = toModuleId(id);
@@ -463,7 +465,7 @@
 /******/ 				}
 /******/ 			}
 /******/ 		}
-/******/
+/******/ 	
 /******/ 		// Store self accepted outdated modules to require them later by the module system
 /******/ 		var outdatedSelfAcceptedModules = [];
 /******/ 		for(i = 0; i < outdatedModules.length; i++) {
@@ -474,7 +476,7 @@
 /******/ 					errorHandler: installedModules[moduleId].hot._selfAccepted
 /******/ 				});
 /******/ 		}
-/******/
+/******/ 	
 /******/ 		// Now in "dispose" phase
 /******/ 		hotSetStatus("dispose");
 /******/ 		Object.keys(hotAvailableFilesMap).forEach(function(chunkId) {
@@ -482,16 +484,16 @@
 /******/ 				hotDisposeChunk(chunkId);
 /******/ 			}
 /******/ 		});
-/******/
+/******/ 	
 /******/ 		var idx;
 /******/ 		var queue = outdatedModules.slice();
 /******/ 		while(queue.length > 0) {
 /******/ 			moduleId = queue.pop();
 /******/ 			module = installedModules[moduleId];
 /******/ 			if(!module) continue;
-/******/
+/******/ 	
 /******/ 			var data = {};
-/******/
+/******/ 	
 /******/ 			// Call dispose handlers
 /******/ 			var disposeHandlers = module.hot._disposeHandlers;
 /******/ 			for(j = 0; j < disposeHandlers.length; j++) {
@@ -499,13 +501,13 @@
 /******/ 				cb(data);
 /******/ 			}
 /******/ 			hotCurrentModuleData[moduleId] = data;
-/******/
+/******/ 	
 /******/ 			// disable module (this disables requires from this module)
 /******/ 			module.hot.active = false;
-/******/
+/******/ 	
 /******/ 			// remove module from cache
 /******/ 			delete installedModules[moduleId];
-/******/
+/******/ 	
 /******/ 			// remove "parents" references from all children
 /******/ 			for(j = 0; j < module.children.length; j++) {
 /******/ 				var child = installedModules[module.children[j]];
@@ -516,7 +518,7 @@
 /******/ 				}
 /******/ 			}
 /******/ 		}
-/******/
+/******/ 	
 /******/ 		// remove outdated dependency from module children
 /******/ 		var dependency;
 /******/ 		var moduleOutdatedDependencies;
@@ -533,19 +535,19 @@
 /******/ 				}
 /******/ 			}
 /******/ 		}
-/******/
+/******/ 	
 /******/ 		// Not in "apply" phase
 /******/ 		hotSetStatus("apply");
-/******/
+/******/ 	
 /******/ 		hotCurrentHash = hotUpdateNewHash;
-/******/
+/******/ 	
 /******/ 		// insert new code
 /******/ 		for(moduleId in appliedUpdate) {
 /******/ 			if(Object.prototype.hasOwnProperty.call(appliedUpdate, moduleId)) {
 /******/ 				modules[moduleId] = appliedUpdate[moduleId];
 /******/ 			}
 /******/ 		}
-/******/
+/******/ 	
 /******/ 		// call accept handlers
 /******/ 		var error = null;
 /******/ 		for(moduleId in outdatedDependencies) {
@@ -580,7 +582,7 @@
 /******/ 				}
 /******/ 			}
 /******/ 		}
-/******/
+/******/ 	
 /******/ 		// Load self accepted modules
 /******/ 		for(i = 0; i < outdatedSelfAcceptedModules.length; i++) {
 /******/ 			var item = outdatedSelfAcceptedModules[i];
@@ -623,13 +625,13 @@
 /******/ 				}
 /******/ 			}
 /******/ 		}
-/******/
+/******/ 	
 /******/ 		// handle errors in accept handlers and self accepted module load
 /******/ 		if(error) {
 /******/ 			hotSetStatus("fail");
 /******/ 			return Promise.reject(error);
 /******/ 		}
-/******/
+/******/ 	
 /******/ 		hotSetStatus("idle");
 /******/ 		return Promise.resolve(outdatedModules);
 /******/ 	}
@@ -6252,7 +6254,7 @@ exports = module.exports = __webpack_require__(23)(undefined);
 
 
 // module
-exports.push([module.i, ".hexagon {\n    width: 20vmin;\n    height: 17.2vmin;\n    overflow: hidden;\n    visibility: hidden;\n    display: block;\n}\n.hexagon_inner1 {\n    width: 100%;\n    height: 100%;\n    overflow: hidden;\n    visibility: hidden;\n    -webkit-transform: rotate(-60deg);\n    -moz-transform: rotate(-60deg);\n    -ms-transform: rotate(-60deg);\n    -o-transform: rotate(-60deg);\n    transform: rotate(-60deg);\n}\n.hexagon_inner2 {\n    width: 100%;\n    height: 100%;\n    overflow: hidden;\n    visibility: visible;\n    -webkit-transform: rotate(-60deg);\n    -moz-transform: rotate(-60deg);\n    -ms-transform: rotate(-60deg);\n    -o-transform: rotate(-60deg);\n    transform: rotate(-60deg);\n}\n.hexagon_inner3 {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    width: 20vmin;\n    height: 100%;\n    overflow: hidden;\n    visibility: visible;\n    -webkit-transform: rotate(120deg);\n    -moz-transform: rotate(120deg);\n    -ms-transform: rotate(120deg);\n    -o-transform: rotate(120deg);\n    transform: rotate(120deg);\n    background-color: #505f74;\n}\n\n.hexagon_icon{\n    font-size: 4vmin;\n    color: #D9D9D9;\n}\n\n.hexagon_text{\n    font-size: 2.4vmin;\n    color: #D9D9D9;\n}\n\n\n", ""]);
+exports.push([module.i, ".hexagon {\r\n    width: 20vmin;\r\n    height: 17.2vmin;\r\n    overflow: hidden;\r\n    visibility: hidden;\r\n    display: block;\r\n}\r\n.hexagon_inner1 {\r\n    width: 100%;\r\n    height: 100%;\r\n    overflow: hidden;\r\n    visibility: hidden;\r\n    -webkit-transform: rotate(-60deg);\r\n    -moz-transform: rotate(-60deg);\r\n    -ms-transform: rotate(-60deg);\r\n    -o-transform: rotate(-60deg);\r\n    transform: rotate(-60deg);\r\n}\r\n.hexagon_inner2 {\r\n    width: 100%;\r\n    height: 100%;\r\n    overflow: hidden;\r\n    visibility: visible;\r\n    -webkit-transform: rotate(-60deg);\r\n    -moz-transform: rotate(-60deg);\r\n    -ms-transform: rotate(-60deg);\r\n    -o-transform: rotate(-60deg);\r\n    transform: rotate(-60deg);\r\n}\r\n.hexagon_inner3 {\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\r\n    width: 20vmin;\r\n    height: 100%;\r\n    overflow: hidden;\r\n    visibility: visible;\r\n    -webkit-transform: rotate(120deg);\r\n    -moz-transform: rotate(120deg);\r\n    -ms-transform: rotate(120deg);\r\n    -o-transform: rotate(120deg);\r\n    transform: rotate(120deg);\r\n    background-color: #505f74;\r\n}\r\n\r\n.hexagon_icon{\r\n    font-size: 4vmin;\r\n    color: #D9D9D9;\r\n}\r\n\r\n.hexagon_text{\r\n    font-size: 2.4vmin;\r\n    color: #D9D9D9;\r\n}\r\n\r\n\r\n", ""]);
 
 // exports
 
@@ -6280,7 +6282,7 @@ exports = module.exports = __webpack_require__(23)(undefined);
 
 
 // module
-exports.push([module.i, "html,\nbody{\n    height: 100%;\n}\n\n.hide{\n    display:none;\n}\n\n.invisible{\n    visibility: hidden;\n}", ""]);
+exports.push([module.i, "html,\r\nbody{\r\n    height: 100%;\r\n}\r\n\r\n.hide{\r\n    display:none;\r\n}\r\n\r\n.invisible{\r\n    visibility: hidden;\r\n}", ""]);
 
 // exports
 
@@ -6294,7 +6296,7 @@ exports = module.exports = __webpack_require__(23)(undefined);
 
 
 // module
-exports.push([module.i, "#wrapper{\n    height: 100%;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    background-color: #7d7daa;\n}\n.frame-cv{\n    position: relative;\n    display: flex;\n    flex-direction: column;\n    max-width: 1440px;\n}\n\n.frame-cv .switch{\n    position:absolute;\n    top: -60vm;\n    right: 0;\n}\n\n.frame-cv .container{\n    flex: auto;\n    display: flex;\n    flex-direction: column;\n}\n\n.frame-cv .container-top,\n.frame-cv .container-bottom{\n    position: relative;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n}\n\n.frame-cv .content{\n    opacity: 0;\n    width: 0;\n    height: 0;\n    animation: trans-content-close 1s;\n}\n\n.frame-cv .content.active{\n    opacity: 1;\n    width: 60vw;\n    height: 35vh;\n    animation: trans-content-open 1s;\n}\n\n@keyframes trans-content-open {\n    0% {\n        opacity: 0;\n        width: 0;\n        height: 0;\n    }\n\n    100%{\n        opacity: 1;\n        width: 60vw;\n        height: 35vh;\n    }\n}\n\n@keyframes trans-content-close {\n    0%{\n        opacity: 1;\n        width: 60vw;\n        height: 35vh;\n    }\n\n    100% {\n        opacity: 0;\n        width: 0;\n        height: 0;\n    }\n}\n\n.hexagon_inner3,\n.hexagon_inner3 *{\n    cursor: pointer;\n}\n\n.hexagon.aboutMe,\n.hexagon.experience{\n    margin-right: 4.9vmin;\n    align-self: flex-start;\n}\n\n.hexagon.skills,\n.hexagon.works{\n    margin-left: 4.9vmin;\n    align-self: flex-end;\n}\n\n.hexagon.avatar,\n.hexagon.contactMe{\n    position: absolute;\n    top:0;\n    bottom:0;\n    left:0;\n    right:0;\n    margin: auto;\n}\n\n.hexagon.avatar{\n    margin-top: -8.6vmin;\n}\n\n.hexagon.contactMe{\n    margin-bottom: -8.6vmin;\n}", ""]);
+exports.push([module.i, "#wrapper{\r\n    height: 100%;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\r\n    background-color: #7d7daa;\r\n}\r\n.frame-cv{\r\n    position: relative;\r\n    display: flex;\r\n    flex-direction: column;\r\n    max-width: 1440px;\r\n}\r\n\r\n.frame-cv .switch{\r\n    position:absolute;\r\n    top: -60vm;\r\n    right: 0;\r\n}\r\n\r\n.frame-cv .container{\r\n    flex: auto;\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.frame-cv .container-top,\r\n.frame-cv .container-bottom{\r\n    position: relative;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n}\r\n\r\n.frame-cv .content{\r\n    opacity: 0;\r\n    width: 0;\r\n    height: 0;\r\n    animation: trans-content-close 1s;\r\n}\r\n\r\n.frame-cv .content.active{\r\n    opacity: 1;\r\n    width: 60vw;\r\n    height: 35vh;\r\n    animation: trans-content-open 1s;\r\n}\r\n\r\n@keyframes trans-content-open {\r\n    0% {\r\n        opacity: 0;\r\n        width: 0;\r\n        height: 0;\r\n    }\r\n\r\n    100%{\r\n        opacity: 1;\r\n        width: 60vw;\r\n        height: 35vh;\r\n    }\r\n}\r\n\r\n@keyframes trans-content-close {\r\n    0%{\r\n        opacity: 1;\r\n        width: 60vw;\r\n        height: 35vh;\r\n    }\r\n\r\n    100% {\r\n        opacity: 0;\r\n        width: 0;\r\n        height: 0;\r\n    }\r\n}\r\n\r\n.hexagon_inner3,\r\n.hexagon_inner3 *{\r\n    cursor: pointer;\r\n}\r\n\r\n.hexagon.aboutMe,\r\n.hexagon.experience{\r\n    margin-right: 4.9vmin;\r\n    align-self: flex-start;\r\n}\r\n\r\n.hexagon.skills,\r\n.hexagon.works{\r\n    margin-left: 4.9vmin;\r\n    align-self: flex-end;\r\n}\r\n\r\n.hexagon.avatar,\r\n.hexagon.contactMe{\r\n    position: absolute;\r\n    top:0;\r\n    bottom:0;\r\n    left:0;\r\n    right:0;\r\n    margin: auto;\r\n}\r\n\r\n.hexagon.avatar{\r\n    margin-top: -8.6vmin;\r\n}\r\n\r\n.hexagon.contactMe{\r\n    margin-bottom: -8.6vmin;\r\n}", ""]);
 
 // exports
 
@@ -6308,7 +6310,7 @@ exports = module.exports = __webpack_require__(23)(undefined);
 
 
 // module
-exports.push([module.i, "/*! normalize.css v4.1.1 | MIT License | github.com/necolas/normalize.css */\n\n/**\n * 1. Change the default font family in all browsers (opinionated).\n * 2. Prevent adjustments of font size after orientation changes in IE and iOS.\n */\n\nhtml {\n    font-family: sans-serif; /* 1 */\n    -ms-text-size-adjust: 100%; /* 2 */\n    -webkit-text-size-adjust: 100%; /* 2 */\n}\n\n/**\n * Remove the margin in all browsers (opinionated).\n */\n\nbody {\n    margin: 0;\n}\n\n/* HTML5 display definitions\n   ========================================================================== */\n\n/**\n * Add the correct display in IE 9-.\n * 1. Add the correct display in Edge, IE, and Firefox.\n * 2. Add the correct display in IE.\n */\n\narticle,\naside,\ndetails, /* 1 */\nfigcaption,\nfigure,\nfooter,\nheader,\nmain, /* 2 */\nmenu,\nnav,\nsection,\nsummary { /* 1 */\n    display: block;\n}\n\n/**\n * Add the correct display in IE 9-.\n */\n\naudio,\ncanvas,\nprogress,\nvideo {\n    display: inline-block;\n}\n\n/**\n * Add the correct display in iOS 4-7.\n */\n\naudio:not([controls]) {\n    display: none;\n    height: 0;\n}\n\n/**\n * Add the correct vertical alignment in Chrome, Firefox, and Opera.\n */\n\nprogress {\n    vertical-align: baseline;\n}\n\n/**\n * Add the correct display in IE 10-.\n * 1. Add the correct display in IE.\n */\n\ntemplate, /* 1 */\n[hidden] {\n    display: none;\n}\n\n/* Links\n   ========================================================================== */\n\n/**\n * 1. Remove the gray background on active links in IE 10.\n * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.\n */\n\na {\n    background-color: transparent; /* 1 */\n    -webkit-text-decoration-skip: objects; /* 2 */\n}\n\n/**\n * Remove the outline on focused links when they are also active or hovered\n * in all browsers (opinionated).\n */\n\na:active,\na:hover {\n    outline-width: 0;\n}\n\n/* Text-level semantics\n   ========================================================================== */\n\n/**\n * 1. Remove the bottom border in Firefox 39-.\n * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.\n */\n\nabbr[title] {\n    border-bottom: none; /* 1 */\n    text-decoration: underline; /* 2 */\n    text-decoration: underline dotted; /* 2 */\n}\n\n/**\n * Prevent the duplicate application of `bolder` by the next rule in Safari 6.\n */\n\nb,\nstrong {\n    font-weight: inherit;\n}\n\n/**\n * Add the correct font weight in Chrome, Edge, and Safari.\n */\n\nb,\nstrong {\n    font-weight: bolder;\n}\n\n/**\n * Add the correct font style in Android 4.3-.\n */\n\ndfn {\n    font-style: italic;\n}\n\n/**\n * Correct the font size and margin on `h1` elements within `section` and\n * `article` contexts in Chrome, Firefox, and Safari.\n */\n\nh1 {\n    font-size: 2em;\n    margin: 0.67em 0;\n}\n\n/**\n * Correct the line-height for all headings in Chrome mobile, Firefox,\n * iOS Safari, Microsoft Edge and IE.\n */\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n    line-height: 1.15;\n}\n\n/**\n * Add the correct background and color in IE 9-.\n */\n\nmark {\n    background-color: #ff0;\n    color: #000;\n}\n\n/**\n * Add the correct font size in all browsers.\n */\n\nsmall {\n    font-size: 80%;\n}\n\n/**\n * Prevent `sub` and `sup` elements from affecting the line height in\n * all browsers.\n */\n\nsub,\nsup {\n    font-size: 75%;\n    line-height: 0;\n    position: relative;\n    vertical-align: baseline;\n}\n\nsub {\n    bottom: -0.25em;\n}\n\nsup {\n    top: -0.5em;\n}\n\n/* Embedded content\n   ========================================================================== */\n\n/**\n * Remove the border on images inside links in IE 10-.\n */\n\nimg {\n    border-style: none;\n}\n\n/**\n * Hide the overflow in IE.\n */\n\nsvg:not(:root) {\n    overflow: hidden;\n}\n\n/* Grouping content\n   ========================================================================== */\n\n/**\n * 1. Correct the inheritance and scaling of font size in all browsers.\n * 2. Correct the odd `em` font sizing in all browsers.\n */\n\ncode,\nkbd,\npre,\nsamp {\n    font-family: monospace, monospace; /* 1 */\n    font-size: 1em; /* 2 */\n}\n\n/**\n * Add the correct margin in IE 8.\n */\n\nfigure {\n    margin: 1em 40px;\n}\n\n/**\n * 1. Add the correct box sizing in Firefox.\n * 2. Show the overflow in Edge and IE.\n */\n\nhr {\n    box-sizing: content-box; /* 1 */\n    height: 0; /* 1 */\n    overflow: visible; /* 2 */\n}\n\n/* Forms\n   ========================================================================== */\n\n/**\n * 1. Change font properties to `inherit` in all browsers (opinionated).\n * 2. Remove the margin in Firefox and Safari.\n */\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n    font: inherit; /* 1 */\n    margin: 0; /* 2 */\n}\n\n/**\n * Restore the font weight unset by the previous rule.\n */\n\noptgroup {\n    font-weight: bold;\n}\n\n/**\n * Show the overflow in IE.\n * 1. Show the overflow in Edge.\n */\n\nbutton,\ninput { /* 1 */\n    overflow: visible;\n}\n\n/**\n * Remove the inheritance of text transform in Edge, Firefox, and IE.\n * 1. Remove the inheritance of text transform in Firefox.\n */\n\nbutton,\nselect { /* 1 */\n    text-transform: none;\n}\n\n/**\n * 1. Prevent a WebKit bug where (2) destroys native `audio` and `video`\n *    controls in Android 4.\n * 2. Correct the inability to style clickable types in iOS and Safari.\n */\n\nbutton,\nhtml [type=\"button\"], /* 1 */\n[type=\"reset\"],\n[type=\"submit\"] {\n    -webkit-appearance: button; /* 2 */\n}\n\n/**\n * Remove the inner border and padding in Firefox.\n */\n\nbutton::-moz-focus-inner,\n[type=\"button\"]::-moz-focus-inner,\n[type=\"reset\"]::-moz-focus-inner,\n[type=\"submit\"]::-moz-focus-inner {\n    border-style: none;\n    padding: 0;\n}\n\n/**\n * Restore the focus styles unset by the previous rule.\n */\n\nbutton:-moz-focusring,\n[type=\"button\"]:-moz-focusring,\n[type=\"reset\"]:-moz-focusring,\n[type=\"submit\"]:-moz-focusring {\n    outline: 1px dotted ButtonText;\n}\n\n/**\n * Change the border, margin, and padding in all browsers (opinionated).\n */\n\nfieldset {\n    border: 1px solid #c0c0c0;\n    margin: 0 2px;\n    padding: 0.35em 0.625em 0.75em;\n}\n\n/**\n * 1. Correct the text wrapping in Edge and IE.\n * 2. Correct the color inheritance from `fieldset` elements in IE.\n * 3. Remove the padding so developers are not caught out when they zero out\n *    `fieldset` elements in all browsers.\n */\n\nlegend {\n    box-sizing: border-box; /* 1 */\n    color: inherit; /* 2 */\n    display: table; /* 1 */\n    max-width: 100%; /* 1 */\n    padding: 0; /* 3 */\n    white-space: normal; /* 1 */\n}\n\n/**\n * Remove the default vertical scrollbar in IE.\n */\n\ntextarea {\n    overflow: auto;\n}\n\n/**\n * 1. Add the correct box sizing in IE 10-.\n * 2. Remove the padding in IE 10-.\n */\n\n[type=\"checkbox\"],\n[type=\"radio\"] {\n    box-sizing: border-box; /* 1 */\n    padding: 0; /* 2 */\n}\n\n/**\n * Correct the cursor style of increment and decrement buttons in Chrome.\n */\n\n[type=\"number\"]::-webkit-inner-spin-button,\n[type=\"number\"]::-webkit-outer-spin-button {\n    height: auto;\n}\n\n/**\n * 1. Correct the odd appearance in Chrome and Safari.\n * 2. Correct the outline style in Safari.\n */\n\n[type=\"search\"] {\n    -webkit-appearance: textfield; /* 1 */\n    outline-offset: -2px; /* 2 */\n}\n\n/**\n * Remove the inner padding and cancel buttons in Chrome and Safari on OS X.\n */\n\n[type=\"search\"]::-webkit-search-cancel-button,\n[type=\"search\"]::-webkit-search-decoration {\n    -webkit-appearance: none;\n}\n\n/**\n * Correct the text style of placeholders in Chrome, Edge, and Safari.\n */\n\n::-webkit-input-placeholder {\n    color: inherit;\n    opacity: 0.54;\n}\n\n/**\n * 1. Correct the inability to style clickable types in iOS and Safari.\n * 2. Change font properties to `inherit` in Safari.\n */\n\n::-webkit-file-upload-button {\n    -webkit-appearance: button; /* 1 */\n    font: inherit; /* 2 */\n}\n", ""]);
+exports.push([module.i, "/*! normalize.css v4.1.1 | MIT License | github.com/necolas/normalize.css */\r\n\r\n/**\r\n * 1. Change the default font family in all browsers (opinionated).\r\n * 2. Prevent adjustments of font size after orientation changes in IE and iOS.\r\n */\r\n\r\nhtml {\r\n    font-family: sans-serif; /* 1 */\r\n    -ms-text-size-adjust: 100%; /* 2 */\r\n    -webkit-text-size-adjust: 100%; /* 2 */\r\n}\r\n\r\n/**\r\n * Remove the margin in all browsers (opinionated).\r\n */\r\n\r\nbody {\r\n    margin: 0;\r\n}\r\n\r\n/* HTML5 display definitions\r\n   ========================================================================== */\r\n\r\n/**\r\n * Add the correct display in IE 9-.\r\n * 1. Add the correct display in Edge, IE, and Firefox.\r\n * 2. Add the correct display in IE.\r\n */\r\n\r\narticle,\r\naside,\r\ndetails, /* 1 */\r\nfigcaption,\r\nfigure,\r\nfooter,\r\nheader,\r\nmain, /* 2 */\r\nmenu,\r\nnav,\r\nsection,\r\nsummary { /* 1 */\r\n    display: block;\r\n}\r\n\r\n/**\r\n * Add the correct display in IE 9-.\r\n */\r\n\r\naudio,\r\ncanvas,\r\nprogress,\r\nvideo {\r\n    display: inline-block;\r\n}\r\n\r\n/**\r\n * Add the correct display in iOS 4-7.\r\n */\r\n\r\naudio:not([controls]) {\r\n    display: none;\r\n    height: 0;\r\n}\r\n\r\n/**\r\n * Add the correct vertical alignment in Chrome, Firefox, and Opera.\r\n */\r\n\r\nprogress {\r\n    vertical-align: baseline;\r\n}\r\n\r\n/**\r\n * Add the correct display in IE 10-.\r\n * 1. Add the correct display in IE.\r\n */\r\n\r\ntemplate, /* 1 */\r\n[hidden] {\r\n    display: none;\r\n}\r\n\r\n/* Links\r\n   ========================================================================== */\r\n\r\n/**\r\n * 1. Remove the gray background on active links in IE 10.\r\n * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.\r\n */\r\n\r\na {\r\n    background-color: transparent; /* 1 */\r\n    -webkit-text-decoration-skip: objects; /* 2 */\r\n}\r\n\r\n/**\r\n * Remove the outline on focused links when they are also active or hovered\r\n * in all browsers (opinionated).\r\n */\r\n\r\na:active,\r\na:hover {\r\n    outline-width: 0;\r\n}\r\n\r\n/* Text-level semantics\r\n   ========================================================================== */\r\n\r\n/**\r\n * 1. Remove the bottom border in Firefox 39-.\r\n * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.\r\n */\r\n\r\nabbr[title] {\r\n    border-bottom: none; /* 1 */\r\n    text-decoration: underline; /* 2 */\r\n    text-decoration: underline dotted; /* 2 */\r\n}\r\n\r\n/**\r\n * Prevent the duplicate application of `bolder` by the next rule in Safari 6.\r\n */\r\n\r\nb,\r\nstrong {\r\n    font-weight: inherit;\r\n}\r\n\r\n/**\r\n * Add the correct font weight in Chrome, Edge, and Safari.\r\n */\r\n\r\nb,\r\nstrong {\r\n    font-weight: bolder;\r\n}\r\n\r\n/**\r\n * Add the correct font style in Android 4.3-.\r\n */\r\n\r\ndfn {\r\n    font-style: italic;\r\n}\r\n\r\n/**\r\n * Correct the font size and margin on `h1` elements within `section` and\r\n * `article` contexts in Chrome, Firefox, and Safari.\r\n */\r\n\r\nh1 {\r\n    font-size: 2em;\r\n    margin: 0.67em 0;\r\n}\r\n\r\n/**\r\n * Correct the line-height for all headings in Chrome mobile, Firefox,\r\n * iOS Safari, Microsoft Edge and IE.\r\n */\r\n\r\nh1,\r\nh2,\r\nh3,\r\nh4,\r\nh5,\r\nh6 {\r\n    line-height: 1.15;\r\n}\r\n\r\n/**\r\n * Add the correct background and color in IE 9-.\r\n */\r\n\r\nmark {\r\n    background-color: #ff0;\r\n    color: #000;\r\n}\r\n\r\n/**\r\n * Add the correct font size in all browsers.\r\n */\r\n\r\nsmall {\r\n    font-size: 80%;\r\n}\r\n\r\n/**\r\n * Prevent `sub` and `sup` elements from affecting the line height in\r\n * all browsers.\r\n */\r\n\r\nsub,\r\nsup {\r\n    font-size: 75%;\r\n    line-height: 0;\r\n    position: relative;\r\n    vertical-align: baseline;\r\n}\r\n\r\nsub {\r\n    bottom: -0.25em;\r\n}\r\n\r\nsup {\r\n    top: -0.5em;\r\n}\r\n\r\n/* Embedded content\r\n   ========================================================================== */\r\n\r\n/**\r\n * Remove the border on images inside links in IE 10-.\r\n */\r\n\r\nimg {\r\n    border-style: none;\r\n}\r\n\r\n/**\r\n * Hide the overflow in IE.\r\n */\r\n\r\nsvg:not(:root) {\r\n    overflow: hidden;\r\n}\r\n\r\n/* Grouping content\r\n   ========================================================================== */\r\n\r\n/**\r\n * 1. Correct the inheritance and scaling of font size in all browsers.\r\n * 2. Correct the odd `em` font sizing in all browsers.\r\n */\r\n\r\ncode,\r\nkbd,\r\npre,\r\nsamp {\r\n    font-family: monospace, monospace; /* 1 */\r\n    font-size: 1em; /* 2 */\r\n}\r\n\r\n/**\r\n * Add the correct margin in IE 8.\r\n */\r\n\r\nfigure {\r\n    margin: 1em 40px;\r\n}\r\n\r\n/**\r\n * 1. Add the correct box sizing in Firefox.\r\n * 2. Show the overflow in Edge and IE.\r\n */\r\n\r\nhr {\r\n    box-sizing: content-box; /* 1 */\r\n    height: 0; /* 1 */\r\n    overflow: visible; /* 2 */\r\n}\r\n\r\n/* Forms\r\n   ========================================================================== */\r\n\r\n/**\r\n * 1. Change font properties to `inherit` in all browsers (opinionated).\r\n * 2. Remove the margin in Firefox and Safari.\r\n */\r\n\r\nbutton,\r\ninput,\r\noptgroup,\r\nselect,\r\ntextarea {\r\n    font: inherit; /* 1 */\r\n    margin: 0; /* 2 */\r\n}\r\n\r\n/**\r\n * Restore the font weight unset by the previous rule.\r\n */\r\n\r\noptgroup {\r\n    font-weight: bold;\r\n}\r\n\r\n/**\r\n * Show the overflow in IE.\r\n * 1. Show the overflow in Edge.\r\n */\r\n\r\nbutton,\r\ninput { /* 1 */\r\n    overflow: visible;\r\n}\r\n\r\n/**\r\n * Remove the inheritance of text transform in Edge, Firefox, and IE.\r\n * 1. Remove the inheritance of text transform in Firefox.\r\n */\r\n\r\nbutton,\r\nselect { /* 1 */\r\n    text-transform: none;\r\n}\r\n\r\n/**\r\n * 1. Prevent a WebKit bug where (2) destroys native `audio` and `video`\r\n *    controls in Android 4.\r\n * 2. Correct the inability to style clickable types in iOS and Safari.\r\n */\r\n\r\nbutton,\r\nhtml [type=\"button\"], /* 1 */\r\n[type=\"reset\"],\r\n[type=\"submit\"] {\r\n    -webkit-appearance: button; /* 2 */\r\n}\r\n\r\n/**\r\n * Remove the inner border and padding in Firefox.\r\n */\r\n\r\nbutton::-moz-focus-inner,\r\n[type=\"button\"]::-moz-focus-inner,\r\n[type=\"reset\"]::-moz-focus-inner,\r\n[type=\"submit\"]::-moz-focus-inner {\r\n    border-style: none;\r\n    padding: 0;\r\n}\r\n\r\n/**\r\n * Restore the focus styles unset by the previous rule.\r\n */\r\n\r\nbutton:-moz-focusring,\r\n[type=\"button\"]:-moz-focusring,\r\n[type=\"reset\"]:-moz-focusring,\r\n[type=\"submit\"]:-moz-focusring {\r\n    outline: 1px dotted ButtonText;\r\n}\r\n\r\n/**\r\n * Change the border, margin, and padding in all browsers (opinionated).\r\n */\r\n\r\nfieldset {\r\n    border: 1px solid #c0c0c0;\r\n    margin: 0 2px;\r\n    padding: 0.35em 0.625em 0.75em;\r\n}\r\n\r\n/**\r\n * 1. Correct the text wrapping in Edge and IE.\r\n * 2. Correct the color inheritance from `fieldset` elements in IE.\r\n * 3. Remove the padding so developers are not caught out when they zero out\r\n *    `fieldset` elements in all browsers.\r\n */\r\n\r\nlegend {\r\n    box-sizing: border-box; /* 1 */\r\n    color: inherit; /* 2 */\r\n    display: table; /* 1 */\r\n    max-width: 100%; /* 1 */\r\n    padding: 0; /* 3 */\r\n    white-space: normal; /* 1 */\r\n}\r\n\r\n/**\r\n * Remove the default vertical scrollbar in IE.\r\n */\r\n\r\ntextarea {\r\n    overflow: auto;\r\n}\r\n\r\n/**\r\n * 1. Add the correct box sizing in IE 10-.\r\n * 2. Remove the padding in IE 10-.\r\n */\r\n\r\n[type=\"checkbox\"],\r\n[type=\"radio\"] {\r\n    box-sizing: border-box; /* 1 */\r\n    padding: 0; /* 2 */\r\n}\r\n\r\n/**\r\n * Correct the cursor style of increment and decrement buttons in Chrome.\r\n */\r\n\r\n[type=\"number\"]::-webkit-inner-spin-button,\r\n[type=\"number\"]::-webkit-outer-spin-button {\r\n    height: auto;\r\n}\r\n\r\n/**\r\n * 1. Correct the odd appearance in Chrome and Safari.\r\n * 2. Correct the outline style in Safari.\r\n */\r\n\r\n[type=\"search\"] {\r\n    -webkit-appearance: textfield; /* 1 */\r\n    outline-offset: -2px; /* 2 */\r\n}\r\n\r\n/**\r\n * Remove the inner padding and cancel buttons in Chrome and Safari on OS X.\r\n */\r\n\r\n[type=\"search\"]::-webkit-search-cancel-button,\r\n[type=\"search\"]::-webkit-search-decoration {\r\n    -webkit-appearance: none;\r\n}\r\n\r\n/**\r\n * Correct the text style of placeholders in Chrome, Edge, and Safari.\r\n */\r\n\r\n::-webkit-input-placeholder {\r\n    color: inherit;\r\n    opacity: 0.54;\r\n}\r\n\r\n/**\r\n * 1. Correct the inability to style clickable types in iOS and Safari.\r\n * 2. Change font properties to `inherit` in Safari.\r\n */\r\n\r\n::-webkit-file-upload-button {\r\n    -webkit-appearance: button; /* 1 */\r\n    font: inherit; /* 2 */\r\n}\r\n", ""]);
 
 // exports
 
@@ -12437,7 +12439,7 @@ var _components = {
 };
 
 var _reactTransformHmr2 = (0, _reactTransformHmr4.default)({
-    filename: '/Users/cinque/Desktop/Code/cv/src/js/cv.jsx',
+    filename: 'D:/Files/GitHub/cv/src/js/cv.jsx',
     components: _components,
     locals: [module],
     imports: [_react3.default]
@@ -12721,7 +12723,7 @@ var _components = {
 };
 
 var _reactTransformHmr2 = (0, _reactTransformHmr4.default)({
-    filename: "/Users/cinque/Desktop/Code/cv/src/js/com/aboutMe.jsx",
+    filename: "D:/Files/GitHub/cv/src/js/com/aboutMe.jsx",
     components: _components,
     locals: [module],
     imports: [_react3.default]
@@ -12791,7 +12793,7 @@ var _components = {
 };
 
 var _reactTransformHmr2 = (0, _reactTransformHmr4.default)({
-    filename: "/Users/cinque/Desktop/Code/cv/src/js/com/contactMe.jsx",
+    filename: "D:/Files/GitHub/cv/src/js/com/contactMe.jsx",
     components: _components,
     locals: [module],
     imports: [_react3.default]
@@ -12865,7 +12867,7 @@ var _components = {
 };
 
 var _reactTransformHmr2 = (0, _reactTransformHmr4.default)({
-    filename: '/Users/cinque/Desktop/Code/cv/src/js/com/experience.jsx',
+    filename: 'D:/Files/GitHub/cv/src/js/com/experience.jsx',
     components: _components,
     locals: [module],
     imports: [_react3.default]
@@ -12994,7 +12996,7 @@ var _components = {
 };
 
 var _reactTransformHmr2 = (0, _reactTransformHmr4.default)({
-    filename: '/Users/cinque/Desktop/Code/cv/src/js/com/hexagon.jsx',
+    filename: 'D:/Files/GitHub/cv/src/js/com/hexagon.jsx',
     components: _components,
     locals: [module],
     imports: [_react3.default]
@@ -13109,7 +13111,7 @@ var _components = {
 };
 
 var _reactTransformHmr2 = (0, _reactTransformHmr4.default)({
-    filename: "/Users/cinque/Desktop/Code/cv/src/js/com/skills.jsx",
+    filename: "D:/Files/GitHub/cv/src/js/com/skills.jsx",
     components: _components,
     locals: [module],
     imports: [_react3.default]
@@ -13183,7 +13185,7 @@ var _components = {
 };
 
 var _reactTransformHmr2 = (0, _reactTransformHmr4.default)({
-    filename: '/Users/cinque/Desktop/Code/cv/src/js/com/works.jsx',
+    filename: 'D:/Files/GitHub/cv/src/js/com/works.jsx',
     components: _components,
     locals: [module],
     imports: [_react3.default]
