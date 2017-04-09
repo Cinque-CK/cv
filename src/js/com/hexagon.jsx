@@ -1,4 +1,5 @@
 import React,{Component,PropTypes} from 'react';
+import ReactTouchEvents from "react-touch-events";
 import '../../css/com/hexagon.css';
 
 export default class HexagonCOMP extends Component{
@@ -26,12 +27,14 @@ export default class HexagonCOMP extends Component{
             <div className={`hexagon ${classPrefix}`}>
                 <div className="hexagon_inner1">
                     <div className="hexagon_inner2">
-                        <div className="hexagon_inner3" onClick={handleClickFunc}>
-                            <div className={"hexagon_icon"}>
-                                <span className={`icon-${iconName}`}></span>
+                        <ReactTouchEvents onTap={handleClickFunc}>
+                            <div className="hexagon_inner3" onClick={handleClickFunc} >
+                                <div className={"hexagon_icon"}>
+                                    <span className={`icon-${iconName}`}></span>
+                                </div>
+                                <div className="hexagon_text">{tipText}</div>
                             </div>
-                            <div className="hexagon_text">{tipText}</div>
-                        </div>
+                        </ReactTouchEvents>
                     </div>
                 </div>
             </div>

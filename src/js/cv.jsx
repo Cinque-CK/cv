@@ -1,7 +1,13 @@
 import React, {Component, PropTypes} from 'react';
-import ReactCssTransitionGroup from 'react-addons-css-transition-group';
+import ReactTouchEvents from "react-touch-events";
 import I18n from './i18n.js';
 import HexgonCOMP from './com/hexagon.jsx';
+import AboutMeCOMP from './com/aboutMe.jsx';
+import SkillsCOMP from './com/skills.jsx';
+import ExperienceCOMP from './com/experience.jsx';
+import WorksCOMP from './com/works.jsx';
+import ContactMeCOMP from './com/contactMe.jsx';
+
 
 import '../css/common.css';
 import '../css/cv.css';
@@ -20,46 +26,55 @@ export default class Cv extends Component {
         this.handleClickWorks = this.handleClickWorks.bind(this);
         this.handleClickContactMe = this.handleClickContactMe.bind(this);
 
+        this.handleClickHexagon = this.handleClickHexagon.bind(this);
+
         this.switchLang = this.switchLang.bind(this);
+
+        this.activating = false; //Is the animation running
     }
 
-    handleClickAboutMe() {
-        if(this.state.activeContent === 0){
-            this.setState({activeContent:-1});
-        } else {
-            this.setState({activeContent:0});
+    handleClickAboutMe(e) {
+        e.preventDefault();
+        this.handleClickHexagon(0);
+    }
+
+    handleClickSkills(e) {
+        e.preventDefault();
+        this.handleClickHexagon(1);
+    }
+
+    handleClickExperience(e) {
+        e.preventDefault();
+        this.handleClickHexagon(2);
+    }
+
+    handleClickWorks(e){
+        e.preventDefault();
+        this.handleClickHexagon(3);
+    }
+
+    handleClickContactMe(e){
+        e.preventDefault();
+        this.handleClickHexagon(4);
+    }
+
+    /**
+     * fire when click hexagon
+     * @param hexIndex
+     */
+    handleClickHexagon(hexIndex){
+        let self = this;
+        if(self.activating){
+            return;
         }
-    }
-
-    handleClickSkills() {
-        if(this.state.activeContent === 1){
-            this.setState({activeContent:-1});
+        if(self.state.activeContent === hexIndex && !self.activating){
+            self.setState({activeContent:-1});
+            self.activating = true;
+            setTimeout(()=>{self.activating = false},1000);
         } else {
-            this.setState({activeContent:1});
-        }
-    }
-
-    handleClickExperience() {
-        if(this.state.activeContent === 2){
-            this.setState({activeContent:-1});
-        } else {
-            this.setState({activeContent:2});
-        }
-    }
-
-    handleClickWorks(){
-        if(this.state.activeContent === 3){
-            this.setState({activeContent:-1});
-        } else {
-            this.setState({activeContent:3});
-        }
-    }
-
-    handleClickContactMe(){
-        if(this.state.activeContent === 4){
-            this.setState({activeContent:-1});
-        } else {
-            this.setState({activeContent:4});
+            self.setState({activeContent:hexIndex});
+            self.activating = true;
+            setTimeout(()=>{self.activating = false},1000);
         }
     }
 
@@ -107,25 +122,44 @@ export default class Cv extends Component {
                 handleClickFunc: this.handleClickContactMe
             };
 
+        var contentDiv = (()=>{
+            switch (this.state.activeContent){
+                case 0:
+                    return <AboutMeCOMP/>;
+                case 1:
+                    return <SkillsCOMP/>;
+                case 2:
+                    return <ExperienceCOMP/>;
+                case 3:
+                    return <WorksCOMP/>;
+                case 4:
+                    return <ContactMeCOMP/>;
+                default:
+                    return (<div></div>);
+            }
+        })();
+
         return (
             <div className="frame-cv">
-                <div className="switch">
-                    <span onClick={this.switchLang}>中</span>
-                    <span onClick={this.switchLang}>En</span>
-                </div>
-                <div className="container">
-                    <div className="container-top">
-                        <HexgonCOMP {...hex_aboutMe}/>
-                        <HexgonCOMP {...hex_avatar}/>
-                        <HexgonCOMP {...hex_ability}/>
+                    <div className="switch">
+                        <span onClick={this.switchLang}>中</span>
+                        <span onClick={this.switchLang}>En</span>
                     </div>
-                    <div className="content" className={this.state.activeContent === -1?"content":"content active"}></div>
-                    <div className="container-bottom">
-                        <HexgonCOMP {...hex_experience}/>
-                        <HexgonCOMP {...hex_contactMe}/>
-                        <HexgonCOMP {...hex_works}/>
+                    <div className="container">
+                        <div className="container-top">
+                            <HexgonCOMP {...hex_aboutMe}/>
+                            <HexgonCOMP {...hex_avatar}/>
+                            <HexgonCOMP {...hex_ability}/>
+                        </div>
+                        <div className={this.state.activeContent === -1?"content":"content active"}>
+                            {contentDiv}
+                        </div>
+                        <div className="container-bottom">
+                            <HexgonCOMP {...hex_experience}/>
+                            <HexgonCOMP {...hex_contactMe}/>
+                            <HexgonCOMP {...hex_works}/>
+                        </div>
                     </div>
-                </div>
             </div>
         )
     }

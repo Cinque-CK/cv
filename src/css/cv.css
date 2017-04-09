@@ -37,14 +37,14 @@
     opacity: 0;
     width: 0;
     height: 0;
-    animation: trans-content-close 2.5s;
+    animation: trans-content-close 1s;
 }
 
 .frame-cv .content.active{
     opacity: 1;
     width: 60vw;
     height: 35vh;
-    animation: trans-content-open 2.5s;
+    animation: trans-content-open 1s;
 }
 
 @keyframes trans-content-open {

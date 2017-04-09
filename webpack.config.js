@@ -12,7 +12,7 @@ module.exports = {
         path: __dirname + '/assets',
         filename: 'js/[name].js'
     },
-    devtool: "eval-source-map",
+    devtool: "cheap-source-map",
     plugins: [
         new webpack.HotModuleReplacementPlugin()
     ],
